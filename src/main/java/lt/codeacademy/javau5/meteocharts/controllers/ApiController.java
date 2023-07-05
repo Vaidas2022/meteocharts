@@ -1,26 +1,24 @@
 package lt.codeacademy.javau5.meteocharts.controllers;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import lt.codeacademy.javau5.meteocharts.entities.Duomenys;
+import lt.codeacademy.javau5.meteocharts.services.MeteoService;
 
-@Controller
-//@RequestMapping("/test")  //localhost:8080/test/orai
+@RestController
+@RequestMapping("/api")
 public class ApiController {
+	
+	@Autowired
+	MeteoService service;
 
-	@GetMapping("/orai")
-	public String getIndex(Model model) {
-		// Simuliuojame linijinio grafiko duomenis
-        List<Integer> xData = Arrays.asList(1, 2, 3, 4, 5);
-        List<Integer> yData = Arrays.asList(10, 20, 15, 30, 25);
+	@GetMapping("/vilnius")
+	public Duomenys getVilniausDuomenys() {
 		
-        model.addAttribute("xData", xData);
-        model.addAttribute("yData", yData);
-        
-		return "home";
+		return service.getWeather();
+		
 	}
 }
