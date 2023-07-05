@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lt.codeacademy.javau5.meteocharts.Utils;
 import lt.codeacademy.javau5.meteocharts.entities.Duomenys;
 import lt.codeacademy.javau5.meteocharts.services.MeteoService;
 
@@ -37,23 +38,10 @@ public class HomeController {
 		
 		String url = "https://api.meteo.lt/v1/stations/vilniaus-ams/observations/latest";
 
-		Duomenys duomenys = service.getWeather(url);
-		
-		List<Double> temperaturos = duomenys
-				.getObservations()
-				.stream()
-				.map( d -> d.getAirTemperature())
-				.toList();
-
-		List<Integer> valandos = duomenys
-				.getObservations()
-				.stream()
-				.map( d -> Integer.parseInt(d.getObservationTimeUtc().substring(11,13) ))
-				.toList();
-				
+		Duomenys duomenys = service.getWeather(url);		
         
-        model.addAttribute("xData", valandos);
-        model.addAttribute("yData", temperaturos);
+        model.addAttribute("xData", duomenys.getValandos());
+        model.addAttribute("yData", duomenys.getTemperaturos());
         
 		return "home";
 	}

@@ -13,4 +13,19 @@ import lombok.NoArgsConstructor;
 public class Duomenys {
 	Station station;
 	List<Observation> observations;	
+	
+	public List<Double> getTemperaturos(){
+		return observations
+				.stream()
+				.map( d -> d.getAirTemperature())
+				.toList();
+	}
+	
+	public List<Integer> getValandos(){
+		return observations
+				.stream()
+				.map( d -> Integer.parseInt(d.getObservationTimeUtc().substring(11,13) ))
+				.toList();
+	}
+	
 }
