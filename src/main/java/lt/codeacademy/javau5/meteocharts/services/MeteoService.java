@@ -3,19 +3,33 @@ package lt.codeacademy.javau5.meteocharts.services;
 import lt.codeacademy.javau5.meteocharts.entities.Duomenys;
 
 import org.springframework.http.ResponseEntity;
+
+import java.util.Arrays;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpEntity;
+
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 
 @Service
 public class MeteoService {
 
-	private static final String WEATHER_URL = "https://api.meteo.lt/v1/stations/vilniaus-ams/observations/2023-07-04";
-
-    public Duomenys getWeather() {
+    public Duomenys getWeather(String weatherUrl) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Duomenys> response = restTemplate.getForEntity(WEATHER_URL, Duomenys.class);
-
-        if (response.getStatusCode().is2xxSuccessful()  ) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));   
+        
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+        
+        ResponseEntity<Duomenys> response = restTemplate.exchange(weatherUrl, HttpMethod.GET, entity, Duomenys.class);
+        
+        
+        if (response.getStatusCode() == HttpStatus.OK ) {
             return response.getBody();
         } else {
             // Handle error response

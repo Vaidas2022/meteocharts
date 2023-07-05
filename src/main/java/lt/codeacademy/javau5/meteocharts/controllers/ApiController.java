@@ -17,8 +17,10 @@ public class ApiController {
 
 	@GetMapping("/vilnius")
 	public Duomenys getVilniausDuomenys() {
-		
-		return service.getWeather();
+
+		String url = "https://api.meteo.lt/v1/stations/vilniaus-ams/observations/2023-07-04";
+
+		return service.getWeather(url);
 		
 	}
 }
