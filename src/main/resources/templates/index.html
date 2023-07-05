@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mano Spring Boot aplikacija</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+	<canvas id="myChart"></canvas>
+	<script th:inline="javascript">
+		let xData = /*[[${xData}]]*/ [];
+	    let yData = /*[[${yData}]]*/ [];
+	    
+	    let ctx = document.getElementById('myChart').getContext('2d');
+	    let myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: xData,
+                datasets: [{
+                    label: 'Grafiniai duomenys',
+                    data: yData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
