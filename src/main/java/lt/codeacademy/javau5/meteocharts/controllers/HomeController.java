@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import lt.codeacademy.javau5.meteocharts.Utils;
 import lt.codeacademy.javau5.meteocharts.entities.Duomenys;
 import lt.codeacademy.javau5.meteocharts.services.MeteoService;
 
