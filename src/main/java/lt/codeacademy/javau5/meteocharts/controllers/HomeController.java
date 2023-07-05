@@ -41,8 +41,24 @@ public class HomeController {
         
         model.addAttribute("xData", duomenys.getValandos());
         model.addAttribute("yData", duomenys.getTemperaturos());
+        model.addAttribute("tData", duomenys.getFeelsLike());
+        model.addAttribute("wData", duomenys.getClouds());
         
 		return "home";
 	}
 		
+	@GetMapping("/kaunas")
+	public String getKaunas(Model model) {
+		
+		String url = "https://api.meteo.lt/v1/stations/kauno-ams/observations/latest";
+
+		Duomenys duomenys = service.getWeather(url);		
+        
+        model.addAttribute("xData", duomenys.getValandos());
+        model.addAttribute("yData", duomenys.getTemperaturos());
+        model.addAttribute("tData", duomenys.getFeelsLike());
+        model.addAttribute("wData", duomenys.getClouds());
+        
+		return "home";
+	}
 }

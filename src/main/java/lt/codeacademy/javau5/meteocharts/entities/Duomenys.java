@@ -28,4 +28,25 @@ public class Duomenys {
 				.toList();
 	}
 	
+	public List<Double> getFeelsLike(){
+		return observations
+				.stream()
+				.map( d -> d.getFeelsLikeTemperature())
+				.toList();
+	}
+	
+	public List<Double> getWindSpeeds(){
+		return observations
+				.stream()
+				.map( d -> d.getWindSpeed())
+				.toList();
+	}
+	
+	public List<Double> getClouds(){
+		return observations
+				.stream()
+				.map( d -> d.getCloudCover()/10d)
+				.toList();
+	}
+	
 }
